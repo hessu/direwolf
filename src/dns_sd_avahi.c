@@ -47,7 +47,7 @@
 #include <avahi-common/malloc.h>
 #include <avahi-common/error.h>
 
-#include "dns_sd.h"
+#include "dns_sd_dw.h"
 #include "dns_sd_common.h"
 #include "textcolor.h"
 
@@ -118,7 +118,7 @@ static void create_services(AvahiClient *c) {
          * only listens on IPv4.
          */
         
-        if ((ret = avahi_entry_group_add_service(group, AVAHI_IF_UNSPEC, AVAHI_PROTO_INET, 0, name, "_kiss-tnc._tcp", NULL, NULL, kiss_port, NULL)) < 0) {
+        if ((ret = avahi_entry_group_add_service(group, AVAHI_IF_UNSPEC, AVAHI_PROTO_INET, 0, name, DNS_SD_SERVICE, NULL, NULL, kiss_port, NULL)) < 0) {
             if (ret == AVAHI_ERR_COLLISION)
                 goto collision;
             dw_printf("Avahi: Failed to add _kiss-tnc._tcp service: %s\n", avahi_strerror(ret));

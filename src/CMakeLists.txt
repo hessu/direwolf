@@ -117,6 +117,12 @@ if(LINUX)
     list(APPEND direwolf_SOURCES
       audio_portaudio.c
       )
+    if(USE_MACOS_DNSSD)
+      list(APPEND direwolf_SOURCES
+        dns_sd_common.c
+        dns_sd_macos.c
+        )
+    endif()
 endif()
 
 add_executable(direwolf
