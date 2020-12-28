@@ -50,6 +50,12 @@ char *dns_sd_default_service_name(void)
     int i = gethostname(hostname, sizeof(hostname));
     if (i == 0) {
         hostname[sizeof(hostname)-1] = 0;
+
+        // on some systems, an FQDN is returned; remove domain part
+        char *dot = strchr(hostname, '.');
+        if (dot)
+            *dot = 0;
+
         snprintf(sname, sizeof(sname), "Dire Wolf on %s", hostname);
         return strdup(sname);
     }
